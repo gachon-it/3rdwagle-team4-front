@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import ProfileSet from './pages/ProfileSet';
 import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
+import Mission from './pages/Mission';
 function App() {
 
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
+        <Route path="/mission" element={<Mission />} />
       </Routes>
     </div>
   )
