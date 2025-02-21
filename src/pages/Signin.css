@@ -1,5 +1,4 @@
-/* Home 페이지 컨테이너 */
-.Home {
+.Signin {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,23 +8,20 @@
     gap : 250px;
 }
 
-  /* 프로젝트명 스타일 */
-.home-title {
+.signin-title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-bottom: 8px;
 }
 
-  /* 슬로건 스타일 */
-.home-slogan {
+.signin-slogan {
     font-size: 14px;
     color: #ff8c94;
     margin-bottom: 40px;
 }
 
-  /* 버튼 컨테이너 */
-.home-buttons {
+.signin-buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;

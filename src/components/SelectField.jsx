@@ -3,7 +3,7 @@ import "./SelectField.css";
 
 function SelectField({ label, options }) {
     return (
-        <label className="select-label">
+        <label className="SelectField">
         {label}
         <select className="custom-select">
             {options.map((option, index) => (
