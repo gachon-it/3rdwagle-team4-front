@@ -1,17 +1,19 @@
-import './App.css'
-import { Routes, Route } from 'react-router-dom';
-import Signin from './pages/Signin';
-import SignUp from './pages/SignUp';
-import SignUpProfile from './pages/SignUpProfile';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import ProfileSet from './pages/ProfileSet';
-import ResetPassword from './pages/ResetPassword';
-import Home from './pages/Home';
-import Mission from './pages/Mission';
-import MissionNew from './pages/MissionNew';
-function App() {
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Signin from "./pages/Signin";
+import SignUp from "./pages/SignUp";
+import SignUpProfile from "./pages/SignUpProfile";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import ProfileSet from "./pages/ProfileSet";
+import ResetPassword from "./pages/ResetPassword";
+import Home from "./pages/Home";
+import Mission from "./pages/Mission";
+import MissionNew from "./pages/MissionNew";
+import HabitmonCreate from "./pages/HabitmonCreate";
+import HabitmonConfirm from "./pages/HabitmonConfirm";
 
+function App() {
   return (
     <div>
       <Routes>
@@ -25,9 +27,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/mission" element={<Mission />} />
         <Route path="/mission-new" element={<MissionNew />} />
+        <Route path="/habitmonCreate" element={<HabitmonCreate />} />
+        <Route path="/habitmonConfirm" element={<HabitmonConfirm />} />
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
