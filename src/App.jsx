@@ -9,6 +9,7 @@ import ProfileSet from './pages/ProfileSet';
 import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
 import Mission from './pages/Mission';
+import MissionNew from './pages/MissionNew';
 function App() {
 
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/resetpassword" element={<ResetPassword />} />
         <Route path="/" element={<Home />} />
         <Route path="/mission" element={<Mission />} />
+        <Route path="/mission-new" element={<MissionNew />} />
       </Routes>
     </div>
   )

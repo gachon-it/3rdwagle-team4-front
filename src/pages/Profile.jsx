@@ -1,4 +1,4 @@
-import HomeMenu from "../components/Profile/Homemenu";
+import HomeMenu from "../components/Profile/HomeMenu";
 import "./Profile.css";
 
 export default function Profile() {
