@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./InputField.css";
 
-function InputField({ label, type = "text", placeholder, onDuplicateCheck, showDuplicateCheck }) {
+function InputField({ label, placeholder, onDuplicateCheck, showDuplicateCheck }) {
     const [value, setValue] = useState("");
 
     // 입력값 변경 핸들러
@@ -14,7 +14,7 @@ function InputField({ label, type = "text", placeholder, onDuplicateCheck, showD
             <h5>{label}</h5>
             <div className="input-wrapper">
                 <input 
-                    type={type} 
+                    type="text"
                     className="input-field" 
                     placeholder={placeholder} 
                     value={value}

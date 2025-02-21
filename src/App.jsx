@@ -7,7 +7,7 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import ProfileSet from './pages/ProfileSet';
 import ResetPassword from './pages/ResetPassword';
-
+import Home from './pages/Home';
 function App() {
 
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/profileset" element={<ProfileSet />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   )
