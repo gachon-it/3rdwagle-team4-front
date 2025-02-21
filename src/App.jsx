@@ -1,5 +1,10 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Signin from "./pages/Signin";
 import SignUp from "./pages/SignUp";
 import SignUpProfile from "./pages/SignUpProfile";
@@ -12,25 +17,54 @@ import Mission from "./pages/Mission";
 import MissionNew from "./pages/MissionNew";
 import HabitmonCreate from "./pages/HabitmonCreate";
 import HabitmonConfirm from "./pages/HabitmonConfirm";
+import { useState, createContext, useEffect } from "react";
+
+export const UserStateContext = createContext();
+export const CharacterStateContext = createContext();
+export const HabbitStateContext = createContext();
 
 function App() {
+  const [userInfo, setUserInfo] = useState(null);
+  const [characterInfo, setCharacterInfo] = useState(null);
+  const [habbitInfo, setHabbitInfo] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/habitmonCreate");
+
+    const storedUser = localStorage.getItem("userInfo");
+    if (storedUser) setUserInfo(JSON.parse(storedUser));
+
+    const storedCharacter = localStorage.getItem("characterInfo");
+    if (storedCharacter) setCharacterInfo(JSON.parse(storedCharacter));
+
+    const storedHabbit = localStorage.getItem("habbitInfo");
+    if (storedHabbit) setHabbitInfo(JSON.parse(storedHabbit));
+  }, []);
+
   return (
-    <div>
-      <Routes>
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/signup-profile" element={<SignUpProfile />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profileset" element={<ProfileSet />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/resetpassword" element={<ResetPassword />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/mission" element={<Mission />} />
-        <Route path="/mission-new" element={<MissionNew />} />
-        <Route path="/habitmonCreate" element={<HabitmonCreate />} />
-        <Route path="/habitmonConfirm" element={<HabitmonConfirm />} />
-      </Routes>
-    </div>
+    <HabbitStateContext.Provider value={{ habbitInfo, setHabbitInfo }}>
+      <CharacterStateContext.Provider
+        value={{ characterInfo, setCharacterInfo }}
+      >
+        <UserStateContext.Provider value={{ userInfo, setUserInfo }}>
+          <Routes>
+            <Route path="/habitmonCreate" element={<HabitmonCreate />} />
+            <Route path="/habitmonConfirm" element={<HabitmonConfirm />} />
+            <Route path="/signup-profile" element={<SignUpProfile />} />
+            <Route path="/mission-new" element={<MissionNew />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profileset" element={<ProfileSet />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/mission" element={<Mission />} />
+          </Routes>
+        </UserStateContext.Provider>
+      </CharacterStateContext.Provider>
+    </HabbitStateContext.Provider>
   );
 }
 

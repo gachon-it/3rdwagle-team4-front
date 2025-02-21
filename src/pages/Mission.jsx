@@ -1,58 +1,119 @@
-    import { IoChevronForwardOutline } from "react-icons/io5";
-    import HomeMenu from "../components/Profile/HomeMenu"
-    import HobbitList from "../components/HobbitList"
-    import Button from "../components/Button"
-    import "./Mission.css";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import HomeMenu from "../components/Profile/HomeMenu";
+import HobbitList from "../components/HobbitList";
+import Button from "../components/Button";
+import { fetchHabitList } from "../util/api";
+import "./Mission.css";
 
-    export default function Mission() {
-        return (
-        <div className="Mission">
-            {/* 달력 헤더 */}
-            <h2 className="checklist-title">CHECK LIST</h2>
-            <div className="calender">
-            <div className="calendar-header">
-                <button>{"<"}</button>
-                <span>2025.02</span>
-                <button>{">"}</button>
-            </div>
+export default function Mission() {
+  const navigate = useNavigate();
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [habitList, setHabitList] = useState([
+    { habitId: 1, name: "아침 운동" },
+    { habitId: 2, name: "독서 30분" },
+    { habitId: 3, name: "물 2L 마시기" },
+  ]);
 
-            {/* 요일 */}
-            <div className="weekdays">
-                <span className="sunday">일</span>
-                <span>월</span>
-                <span>화</span>
-                <span>수</span>
-                <span>목</span>
-                <span>금</span>
-                <span>토</span>
-            </div>
+  useEffect(() => {
+    const memberId = localStorage.getItem("memberId"); // 로컬스토리지에서 memberId 가져오기
+    if (!memberId) return;
 
-            {/* 날짜 */}
-            <div className="dates">
-                <span>16</span>
-                <span>17</span>
-                <span>18</span>
-                <span>19</span>
-                <span>20</span>
-                <span>21</span>
-                <span className="selected">22</span>
-            </div>
+    fetchHabitList(memberId).then(setHabitList); // 공통 함수 사용
+  }, []);
 
+  const handleNavigate = () => {
+    navigate("/mission-new");
+  };
+
+  const getWeekDates = (date) => {
+    const startOfWeek = new Date(date);
+    startOfWeek.setDate(date.getDate() - date.getDay());
+    return Array.from({ length: 7 }, (_, i) => {
+      const day = new Date(startOfWeek);
+      day.setDate(startOfWeek.getDate() + i);
+      return day;
+    });
+  };
+
+  const handlePrevWeek = () => {
+    setCurrentDate((prev) => {
+      const newDate = new Date(prev);
+      newDate.setDate(prev.getDate() - 7);
+      return newDate;
+    });
+  };
+
+  const handleNextWeek = () => {
+    setCurrentDate((prev) => {
+      const newDate = new Date(prev);
+      newDate.setDate(prev.getDate() + 7);
+      return newDate;
+    });
+  };
+
+  const weekDates = getWeekDates(currentDate);
+  const formattedMonth = `${currentDate.getFullYear()}.${(
+    currentDate.getMonth() + 1
+  )
+    .toString()
+    .padStart(2, "0")}`;
+
+  return (
+    <div className="Mission">
+      {/* 달력 헤더 */}
+      <h2 className="checklist-title">CHECK LIST</h2>
+      <div className="calender">
+        <div className="calendar-header">
+          <button className="calendar-next" onClick={handlePrevWeek}>
+            {"<"}
+          </button>
+          <span>{formattedMonth}</span>
+          <button className="calendar-next" onClick={handleNextWeek}>
+            {">"}
+          </button>
         </div>
-        
+
+        {/* 요일 */}
+        <div className="weekdays">
+          <span className="sunday">일</span>
+          <span>월</span>
+          <span>화</span>
+          <span>수</span>
+          <span>목</span>
+          <span>금</span>
+          <span>토</span>
+        </div>
+
+        {/* 날짜 */}
+        <div className="dates">
+          {weekDates.map((date, index) => (
+            <span
+              key={index}
+              className={
+                date.toDateString() === new Date().toDateString()
+                  ? "selected"
+                  : ""
+              }
+            >
+              {date.getDate()}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="habbit-list">
         <div className="habbit-list">
-            <HobbitList/>
-        </div>   
-
-
-        <div className="habbit-add">
-            <Button text={"습관 추가"} type={"primary"}/>
+          <HobbitList text={"🌱 습관리스트"} list={habitList} />
         </div>
+      </div>
+      <div className="habbit-add">
+        <Button text={"습관 추가"} type={"primary"} onClick={handleNavigate} />
+      </div>
 
-        <div className="habbit-menu">
-            <HomeMenu />
-        </div>
-        
+      <div className="habbit-menu">
+        <HomeMenu />
+      </div>
     </div>
-        );
-    }
+  );
+}

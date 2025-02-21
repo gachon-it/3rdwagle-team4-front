@@ -1,17 +1,20 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import "./HabitmonConfirm.css";
 import habbitmon0 from "../assets/habbitmon0.png";
 import Button from "../components/Button";
+import { CharacterStateContext } from "../App";
 
 const HabitmonConfirm = () => {
-  const location = useLocation();
+  // ✅ characterInfo가 배열이 아닌 객체여야 하므로, 상태에서 가져올 때 수정
+  const { characterInfo } = useContext(CharacterStateContext) || {}; // 기본값을 빈 객체로 처리
+  const habitmonName = characterInfo?.name || "습관이"; // characterInfo가 없으면 기본값 "습관이"
+
   const navigate = useNavigate();
-  const habitmonName = location.state?.habitmonName || "습관몬";
 
   const handleButtonClick = () => {
     if (habitmonName) {
-      navigate("/");
+      navigate("/signup-profile");
     }
   };
 

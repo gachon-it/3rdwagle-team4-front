@@ -1,21 +1,30 @@
 import "./HabitmonCreate.css";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import habbitmon0 from "../assets/habbitmon0.png";
 import Button from "../components/Button";
+import { CharacterStateContext } from "../App";
 
 const HabitmonCreate = () => {
   const [habitmonName, setHabitmonName] = useState("");
-  const navigate = useNavigate;
+  const navigate = useNavigate(); // 페이지 이동을 위한 훅
+  const { setCharacterInfo } = useContext(CharacterStateContext); // 상태 업데이트 함수
 
-  const handleInputChange = (e) => {
-    setHabitmonName(e.target.value);
-  };
+  // 입력값 처리
+  const handleInputChange = (e) => setHabitmonName(e.target.value);
 
+  // 완료 버튼 클릭 시 실행
   const handleButtonClick = () => {
-    if (habitmonName) {
-      navigate("/habitmonConfirm");
+    if (!habitmonName.trim()) {
+      alert("습관몬 이름을 입력하세요!");
+      return;
     }
+
+    const newCharacter = { name: habitmonName }; // 새로운 캐릭터 정보 객체 생성
+    setCharacterInfo(newCharacter); // 상태 업데이트
+    localStorage.setItem("characterInfo", JSON.stringify(newCharacter)); // 로컬스토리지에 저장
+
+    navigate("/habitmonConfirm"); // 페이지 이동
   };
 
   return (
