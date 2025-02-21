@@ -1,0 +1,4 @@
+.CheckboxGroup {
+    display :flex;
+    flex-direction: column;
+}
