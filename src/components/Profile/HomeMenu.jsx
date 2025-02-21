@@ -7,7 +7,7 @@ import "./HomeMenu.css";
 const HomeMenu = () => {
     return (
         <nav className="HomeMenu">
-        <NavLink to="/home" className="menu-item">
+        <NavLink to="/" className="menu-item">
             <IoHomeOutline size={24} />
             <span>홈</span>
         </NavLink>
@@ -15,7 +15,7 @@ const HomeMenu = () => {
             <SlMagnifier size={24} />
             <span>미션</span>
         </NavLink>
-        <NavLink to="/profile" className="menu-item active">
+        <NavLink to="/profile" className="menu-item">
             <IoPersonOutline size={24} />
             <span>프로필</span>
         </NavLink>
