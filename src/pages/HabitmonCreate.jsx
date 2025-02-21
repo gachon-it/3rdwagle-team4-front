@@ -1,7 +1,7 @@
 import "./HabitmonCreate.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import habitmon1 from "../assets/habitmon1.png";
+import habbitmon0 from "../assets/habbitmon0.png";
 import Button from "../components/Button";
 
 const HabitmonCreate = () => {
@@ -21,7 +21,7 @@ const HabitmonCreate = () => {
   return (
     <div className="habitmon-container">
       <div className="Little-habitmon">
-        <img src={habitmon1} alt="Habitmon" className="habitmon-image" />
+        <img src={habbitmon0} alt="Habitmon" className="habitmon-image" />
         <input
           type="text"
           placeholder="습관몬"

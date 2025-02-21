@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./HabitmonConfirm.css";
-import habitmon1 from "../assets/habitmon1.png";
+import habbitmon0 from "../assets/habbitmon0.png";
 import Button from "../components/Button";
 
 const HabitmonConfirm = () => {
@@ -23,7 +23,7 @@ const HabitmonConfirm = () => {
           <span className="habitmon-highlight">{habitmonName}!</span>
         </p>
         <img
-          src={habitmon1}
+          src={habbitmon0}
           alt="Habitmon"
           className="habitmon-confirm-image"
         />
